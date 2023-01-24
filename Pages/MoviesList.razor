@@ -1,0 +1,47 @@
+@page "/movies"
+
+<PageTitle>Movies List</PageTitle>
+
+@using BlazorApp.Data
+@inject MemoryDatabase MemoryDatabase
+
+ <table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Director</th>
+            <th>Año de lanzamiento</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in moviesList)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Director</td>
+                <td>@movie.ReleaseYear</td>
+                <td>
+                    <a class="btn btn-success btn-sm" href="movies/edit/@movie.Id">Editar</a>
+                    <button class="btn btn-danger btn-sm" @onclick="(() => DeleteMovie(movie.Id))">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+    private List<Movie> moviesList;
+    
+    protected override void OnInitialized()
+    {
+        moviesList = MemoryDatabase.Movies;
+    }
+
+    private void DeleteMovie(int id)
+    {
+        MemoryDatabase.Movies.RemoveAll(x => x.Id == id);
+    }
+    
+    
+}
