@@ -1,12 +1,16 @@
 namespace BlazorApp.Data;
 
+using BlazorApp.Data.Models;
+
 public class MemoryDatabase{
     public List<Movie> Movies { get; set; } = new List<Movie>();
+    public List<Category> Categories { get; set; } = new List<Category>();  
 
 
     public MemoryDatabase()
     {
         this.AddMovies();
+        this.AddCategories();
     
     }
 
@@ -20,5 +24,16 @@ public class MemoryDatabase{
         Movies.Add(new Movie { Id = 6, Title = "Pulp Fiction", Director = "Quentin Tarantino", ReleaseYear = 1994 });
         Movies.Add(new Movie { Id = 7, Title = "Schindler's List", Director = "Steven Spielberg", ReleaseYear = 1993 });
     }
+
+    private void AddCategories()
+    {
+        Categories.Add(new Category { Id = 1, Name = "Action" });
+        Categories.Add(new Category { Id = 2, Name = "Comedy" });
+        Categories.Add(new Category { Id = 3, Name = "Drama" });
+        Categories.Add(new Category { Id = 4, Name = "Horror" });
+        Categories.Add(new Category { Id = 5, Name = "Romance" });
+        Categories.Add(new Category { Id = 6, Name = "Thriller" });
+    }
+
 
 }
