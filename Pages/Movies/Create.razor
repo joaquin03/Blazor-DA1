@@ -38,8 +38,8 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-    private Movie currentMovie;
-    private List<Category> Categories;
+    private Movie? currentMovie;
+    private List<Category>? Categories;
     private int SelectedCategoryId;
 
     protected override void OnInitialized()
@@ -52,7 +52,6 @@
     private void SaveChanges()
     {
         MemoryDatabase.AddMovie(currentMovie);
-
         NavigationManager.NavigateTo("/movies");
     }
 

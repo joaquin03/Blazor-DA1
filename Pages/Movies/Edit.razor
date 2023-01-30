@@ -20,20 +20,20 @@
         <label for="releaseYear">Año de lanzamiento</label>
         <input type="text" class="form-control" id="releaseYear" @bind="currentMovie.ReleaseYear" />
     </div>
-     <div class="form-group">
-        <label for="releaseYear">Category @currentMovie.Category.Name</label>
-     </div>
 
     <div class="form-group">
-        <Select @bind-Value="SelectedCategoryId" @bind-Value:event="onchange" class="form-control" >
-            <option value="">Select Category</option>
+        <label for="Category">Category</label>
+        <select class="form-control" value="@SelectedCategoryId" @onchange="ChangeCategory" >
+            <option disable selected value="">Select Category</option>
             @foreach (var category in Categories)
             {
-                <option value="@category.Id">@category.Name</option>
+                <option value="@category.Id" selected="@(category.Id==SelectedCategoryId)" >
+                    @category.Name
+                </option>
             }
-        </Select>
+        </select>
     </div>
-
+    
     <button type="button" class="btn btn-primary" @onclick="SaveChanges">Guardar cambios</button>
     <a href="/movies">Cancelar</a>
 </form>
@@ -41,8 +41,8 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-    private Movie currentMovie;
-    private List<Category> Categories;
+    private Movie? currentMovie;
+    private List<Category>? Categories;
     private int SelectedCategoryId;
 
     protected override void OnInitialized()
@@ -60,4 +60,12 @@
 
         NavigationManager.NavigateTo("/movies");
     }
+
+    public void ChangeCategory(ChangeEventArgs e)
+    {
+        int catId = int.Parse(e.Value.ToString());
+        currentMovie.Category = MemoryDatabase.FindCategory(catId);
+    }
+
+    
 }

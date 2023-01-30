@@ -1,6 +1,6 @@
 @page "/categories"
 
-<PageTitle>Categories List</PageTitle>
+<pageTitle>Categories List</pageTitle>
 
 @using BlazorApp.Data
 @using BlazorApp.Data.Models
@@ -36,7 +36,7 @@
 </table>
 
 @code{
-    private List<Category> categoriesList;
+    private List<Category>? categoriesList;
     
     protected override void OnInitialized()
     {
