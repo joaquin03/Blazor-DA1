@@ -13,6 +13,28 @@ public class MemoryDatabase{
         this.AddDefaultCategories();
     }
 
+    public void AddMovie(Movie movie)
+    {
+        movie.Id = Movies.Count + 1;
+        Movies.Add(movie);
+    }
+
+    public Movie FindMovie(int id)
+    {
+        return Movies.FirstOrDefault(m => m.Id == id);
+    }
+
+    public void UpdateMovie(Movie element)
+    {
+        Movies = Movies.Select(e => e.Id == element.Id ? element : e).ToList();
+    }
+
+    public void DeleteMovie(int id)
+    {
+        Movies.RemoveAll(x => x.Id == id);
+    }
+
+
     public void AddCategory(Category category)
     {
         category.Id = Categories.Count + 1;
@@ -26,12 +48,12 @@ public class MemoryDatabase{
 
     public void UpdateCategory(Category element)
     {
-        MemoryDatabase.Categories = MemoryDatabase.Categories.Select(e => e.Id == element.Id ? element : e).ToList();
+        Categories = Categories.Select(e => e.Id == element.Id ? element : e).ToList();
     }
 
-    public void DeleteCategory(Category element)
+    public void DeleteCategory(int id)
     {
-        MemoryDatabase.Categories.RemoveAll(x => x.Id == id);
+        Categories.RemoveAll(x => x.Id == id);
     }
 
 

@@ -1,0 +1,65 @@
+@page "/movies/create/"
+
+<h1>Create Movie</h1>
+
+@using BlazorApp.Data
+@using BlazorApp.Data.Models
+@inject MemoryDatabase MemoryDatabase
+@inject NavigationManager NavigationManager
+
+<form>
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" class="form-control" id="title" @bind="currentMovie.Title" />
+    </div>
+    <div class="form-group">
+        <label for="director">Director</label>
+        <input type="text" class="form-control" id="director" @bind="currentMovie.Director" />
+    </div>
+    <div class="form-group">
+        <label for="releaseYear">Año de lanzamiento</label>
+        <input type="number" class="form-control" id="releaseYear" @bind="currentMovie.ReleaseYear" />
+    </div>
+
+    <div class="form-group">
+        <Select @bind-Value="SelectedCategoryId" @bind-Value:event="onchange" class="form-control" >
+            <option value="">Select Category</option>
+            @foreach (var category in Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </Select>
+    </div>
+
+    <button type="button" class="btn btn-primary" @onclick="SaveChanges">Guardar cambios</button>
+    <a href="/movies">Cancelar</a>
+</form>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Movie currentMovie;
+    private List<Category> Categories;
+    private int SelectedCategoryId;
+
+    protected override void OnInitialized()
+    {
+        currentMovie = new Movie();
+        currentMovie.ReleaseYear= DateTime.Now.Year;
+        Categories = MemoryDatabase.Categories;
+    }
+
+    private void SaveChanges()
+    {
+        MemoryDatabase.AddMovie(currentMovie);
+
+        NavigationManager.NavigateTo("/movies");
+    }
+
+   
+    private void OnSelectedCategoryChanged()
+    {
+        Category SelectedCategory = MemoryDatabase.FindCategory(SelectedCategoryId);
+        currentMovie.Category = SelectedCategory;
+    }
+}

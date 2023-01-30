@@ -3,7 +3,8 @@
 ## Code: ##
 
 - [X] CRUD Movies
-- [ ] CRUD Categories
+- [X] CRUD Categories
+- [ ] Categories - Movies
 - [ ] CRUD Actor
 
 - [ ] CRUD Director [Extend Person - Actor - Director]

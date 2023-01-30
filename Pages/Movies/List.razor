@@ -3,8 +3,15 @@
 <PageTitle>Movies List</PageTitle>
 
 @using BlazorApp.Data
+@using BlazorApp.Data.Models
 @inject MemoryDatabase MemoryDatabase
 
+
+<h1>
+    Movies List
+    <a href="/movies/create" 
+        class="btn btn-success btn-sm" style="float: right;margin-right: 40px;">Create +</a>
+</h1>
  <table class="table">
     <thead>
         <tr>
@@ -22,7 +29,7 @@
                 <td>@movie.Director</td>
                 <td>@movie.ReleaseYear</td>
                 <td>
-                    <a class="btn btn-success btn-sm" href="movies/edit/@movie.Id">Editar</a>
+                    <a class="btn btn-success btn-sm" href="movies/@movie.Id/edit/">Editar</a>
                     <button class="btn btn-danger btn-sm" @onclick="(() => DeleteMovie(movie.Id))">Eliminar</button>
                 </td>
             </tr>
