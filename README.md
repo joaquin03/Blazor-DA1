@@ -1,12 +1,12 @@
 # Blazor-DA1 #
 
-## Code: ##
+## Code: Parte 1 ## 
 
 - [X] CRUD Movies
 - [X] CRUD Categories
 - [X] Categories - Movies
 - [ ] CRUD Actor
-
+- [ ] linq Example
 - [ ] CRUD Director [Extend Person - Actor - Director]
 
 
@@ -20,4 +20,14 @@
 2. how to run app
 3. html / .razor
 - [ ] First example .net 
+
+
+## Code: Parte 2 ## 
+- [ ] Integrate E.F
+- [ ] E.F Movies
+- [ ] E.F Actor - Director (inheritance)
+- [ ] linq Example
+
+
+## Teorico: Parte 2##
 
