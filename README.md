@@ -4,7 +4,7 @@
 
 - [X] CRUD Movies
 - [X] CRUD Categories
-- [ ] Categories - Movies
+- [X] Categories - Movies
 - [ ] CRUD Actor
 
 - [ ] CRUD Director [Extend Person - Actor - Director]
