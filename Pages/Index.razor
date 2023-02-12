@@ -2,8 +2,42 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+@using BlazorApp.Data
+@using BlazorApp.Data.Models
+@using ActorModel = BlazorApp.Data.Models.Actor
+@inject MemoryDatabase MemoryDatabase
 
-Welcome to your new app. Test 2
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <div class="card-header">
+       Actores que actuaron en pelicula en peliculas de los 90
+    </div>
+    @foreach (var item in actors)
+    {
+        <li class="list-group-item">@item.Name</li>
+    }
+  </ul>
+</div>
+
+
+@code{
+    private List<ActorModel>? actors;
+    private List<Movie> movies;
+    
+    protected override void OnInitialized()
+    {
+        movies = MemoryDatabase.Movies;
+        this.loadActors();
+    }
+
+    protected void loadActors()
+    {
+        var currentYear = DateTime.Now.Year;
+        actors = MemoryDatabase.Movies
+                    .Where(m => m.ReleaseYear >= 1990 && m.ReleaseYear < 2000)
+                    .SelectMany(m => m.Actors)
+                    .Distinct()
+                    .ToList();
+    }
+}
