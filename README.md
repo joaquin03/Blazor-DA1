@@ -7,6 +7,7 @@
 - [X] Categories - Movies
 - [X] CRUD Actor
 - [X] Movie - Actor [n-n]
+- [ ] TDD
 - [ ] Add Validatons
 - [ ] Add Image to Actor
 - [X] linq Example
