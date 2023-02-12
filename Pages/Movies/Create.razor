@@ -22,13 +22,26 @@
     </div>
 
     <div class="form-group">
-        <Select @bind-Value="SelectedCategoryId" @bind-Value:event="onchange" class="form-control" >
+        <label for="releaseYear">Categoria</label>
+        <Select @bind-Value="selectedCategoryId" @bind-Value:event="onchange" class="form-control" >
             <option value="">Select Category</option>
-            @foreach (var category in Categories)
+            @foreach (var category in categories)
             {
                 <option value="@category.Id">@category.Name</option>
             }
         </Select>
+    </div>
+
+     <div class="form-group">
+        <label for="actor">Select Actors</label>
+        <select multiple class="form-control" id="actos" @onchange="ChangeActors" >
+            @foreach (var actor in actors)
+            {
+                <option value="@actor.Id" selected="@currentMovie.hasActor(@actor.Id)" >
+                    @actor.Name
+                </option>
+            }
+        </select>
     </div>
 
     <button type="button" class="btn btn-primary" @onclick="SaveChanges">Guardar cambios</button>
@@ -39,14 +52,18 @@
     [Parameter]
     public int Id { get; set; }
     private Movie? currentMovie;
-    private List<Category>? Categories;
-    private int SelectedCategoryId;
+    private List<Category>? categories;
+    private int selectedCategoryId;
+
+    private List<Actor>? actors;
+    private List<int> selectedActorIds = new List<int>();
 
     protected override void OnInitialized()
     {
         currentMovie = new Movie();
         currentMovie.ReleaseYear= DateTime.Now.Year;
-        Categories = MemoryDatabase.Categories;
+        categories = MemoryDatabase.Categories;
+        actors = MemoryDatabase.Actors;
     }
 
     private void SaveChanges()
@@ -58,7 +75,19 @@
    
     private void OnSelectedCategoryChanged()
     {
-        Category SelectedCategory = MemoryDatabase.FindCategory(SelectedCategoryId);
+        Category SelectedCategory = MemoryDatabase.FindCategory(selectedCategoryId);
         currentMovie.Category = SelectedCategory;
+    }
+
+    public void ChangeActors(ChangeEventArgs e)
+    {
+        var actorsIdsString = (string[])e.Value;
+        var actors = new List<Actor>();
+        foreach (var stringId in actorsIdsString)
+        {
+            var actor = MemoryDatabase.FindActor(int.Parse(stringId));
+            actors.Add(actor);
+        }
+        currentMovie.Actors = actors;
     }
 }

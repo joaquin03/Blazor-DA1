@@ -6,7 +6,7 @@
 - [X] CRUD Categories
 - [X] Categories - Movies
 - [X] CRUD Actor
-- [ ] Movie - Actor [n-n]
+- [X] Movie - Actor [n-n]
 - [ ] Add Image to Actor
 - [ ] linq Example
 - [ ] CRUD Director [Extend Person - Actor - Director]
