@@ -8,36 +8,62 @@
 @inject MemoryDatabase MemoryDatabase
 
 
-<div class="card" style="width: 18rem;">
-  <ul class="list-group list-group-flush">
-    <div class="card-header">
-       Actores que actuaron en pelicula en peliculas de los 90
+<div class="row">
+    <div class="card col-sm" style="width: 18rem;">
+        <div class="card-header">
+            Actores que actuaron en pelicula en peliculas de los 90
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (var item in actors90)
+            {
+                <li class="list-group-item">@item.Name</li>
+            }
+        </ul>
     </div>
-    @foreach (var item in actors)
-    {
-        <li class="list-group-item">@item.Name</li>
-    }
-  </ul>
+
+    <div class="card col-sm" style="width: 18rem;">
+        <div class="card-header">
+            Peliculas de Accion
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (var item in moivesAction)
+            {
+                <li class="list-group-item">@item.Title</li>
+            }
+        </ul>
+    </div>
 </div>
 
 
+
+
+
 @code{
-    private List<ActorModel>? actors;
+    private List<ActorModel>? actors90;
+    private List<Movie>? moivesAction;
     private List<Movie> movies;
     
     protected override void OnInitialized()
     {
         movies = MemoryDatabase.Movies;
-        this.loadActors();
+        this.loadActors90();
+        this.loadMoviesAction();
     }
 
-    protected void loadActors()
+    protected void loadActors90()
     {
         var currentYear = DateTime.Now.Year;
-        actors = MemoryDatabase.Movies
+        actors90 = MemoryDatabase.Movies
                     .Where(m => m.ReleaseYear >= 1990 && m.ReleaseYear < 2000)
                     .SelectMany(m => m.Actors)
                     .Distinct()
+                    .ToList();
+    }
+
+    protected void loadMoviesAction()
+    {
+        moivesAction = MemoryDatabase.Movies
+                    .Where(m => m.Category != null && m.Category.Name.Contains("Action"))
                     .ToList();
     }
 }
