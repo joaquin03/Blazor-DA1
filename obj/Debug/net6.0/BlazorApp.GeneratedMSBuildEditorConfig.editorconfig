@@ -19,6 +19,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/joaquinanduano/Desktop/Blazor1/BlazorApp/Pages/Actor/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWN0b3IvQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joaquinanduano/Desktop/Blazor1/BlazorApp/Pages/Actor/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWN0b3IvRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joaquinanduano/Desktop/Blazor1/BlazorApp/Pages/Actor/List.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWN0b3IvTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/joaquinanduano/Desktop/Blazor1/BlazorApp/Pages/Category/Create.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2F0ZWdvcnkvQ3JlYXRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
